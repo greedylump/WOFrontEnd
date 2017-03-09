@@ -13,9 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WorkOutClass;
-using MahApps.Metro.Controls;
 
+using MahApps.Metro.Controls;
+using WorkOutClass;
 
 namespace WOFrontEnd
 {
@@ -33,6 +33,7 @@ namespace WOFrontEnd
             
             CommandBinding saveCommand = new CommandBinding(ApplicationCommands.Save);
             this.CommandBindings.Add(saveCommand);
+            
             saveCommand.Executed += new ExecutedRoutedEventHandler( saveCommand_Executed);
 
         }
