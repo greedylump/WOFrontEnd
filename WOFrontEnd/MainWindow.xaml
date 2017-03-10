@@ -104,7 +104,7 @@
                         HorizontalAlignment="Left"
                         Content="Add Exercise" 
                         Margin="10,0,0,0"
-                        Name="addButton" Click="addButton_Click" ToolTip="Press here to add the current exercise and add another.">
+                        Name="addButton"  ToolTip="Press here to add the current exercise and add another.">
                     <Button.Effect>
                         <DropShadowEffect/>
                     </Button.Effect>
@@ -130,7 +130,7 @@
                     <TextBox Height="{Binding ActualHeight, ElementName=exercisePanel}"
                             
                              Foreground="#FF291F1F"
-                             x:Name="repBox" KeyDown="repBox_KeyDown"/>
+                             x:Name="repBox" />
                 </StackPanel>
 
 

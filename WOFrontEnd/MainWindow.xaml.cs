@@ -24,20 +24,23 @@ namespace WOFrontEnd
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        /*
         WorkOut workout = new WorkOut();
         Exercise exercise;
         //= new Exercise();
+        */
         public MainWindow()
         {
             InitializeComponent();
-            
+            /*
             CommandBinding saveCommand = new CommandBinding(ApplicationCommands.Save);
             this.CommandBindings.Add(saveCommand);
             
             saveCommand.Executed += new ExecutedRoutedEventHandler( saveCommand_Executed);
+            */
 
         }
-
+        /*
         private void saveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         { 
             workout.Date = WorkOut.stringToDate(dateTB.Text);
@@ -85,5 +88,6 @@ namespace WOFrontEnd
             repList.Items.Clear();
               
         }
+        */
     }
 }
