@@ -11,11 +11,13 @@ using Newtonsoft.Json;
 namespace WOFrontEnd.Services
 {/// <summary>
 /// The purpose of this data service is to load the saved workouts and 
-/// facilitate saving operations. This allows the repository to be agnostic about the save medium
+/// facilitate saving operations. This allows the repository to be agnostic about the save medium.
+/// Also, the SAME service is being passed to both views, ensuring they have the same data
 /// </summary>
-    class WorkOutDataService
+    public class WorkOutDataService
     {
         WorkOutRepository workoutrepository;
+
      
 
         public WorkOutDataService()
