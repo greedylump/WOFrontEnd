@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 using MahApps.Metro.Controls;
 using WorkOutClass;
+using WOFrontEnd.ViewModels;
 
 namespace WOFrontEnd
 {
@@ -32,6 +33,10 @@ namespace WOFrontEnd
         public MainWindow()
         {
             InitializeComponent();
+            ViewModelLocater vmLocater = new ViewModelLocater();
+           
+            
+            
             /*
             CommandBinding saveCommand = new CommandBinding(ApplicationCommands.Save);
             this.CommandBindings.Add(saveCommand);

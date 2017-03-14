@@ -1,0 +1,41 @@
+﻿<Window x:Class="WOFrontEnd.Views.TempMenuStuff"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WOFrontEnd.Views"
+        mc:Ignorable="d"
+        Title="TempMenuStuff" Height="300" Width="300">
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top"
+                  Background="LightGray">
+                <MenuItem Header="_File"
+                          Foreground="#FF291F1F" />
+                <MenuItem Header="_Edit"
+                          Foreground="#FF291F1F">
+                    <MenuItem Command="Undo"
+                              Header="_Undo"
+                              Foreground="#FF291F1F" />
+                    <Separator />
+                    <MenuItem Command="Cut"
+                              Header="_Cut"
+                              Foreground="#FF291F1F" />
+                    <MenuItem Command="Copy"
+                              Header="_Copy"
+                              Foreground="#FF291F1F" />
+                    <MenuItem Command="Paste"
+                              Header="_Paste"
+                              Foreground="#FF291F1F" />
+                    <Separator />
+                    <MenuItem Command="SelectAll"
+                              Header="_Select All"
+                              Foreground="#FF291F1F" />
+                </MenuItem>
+                <MenuItem Header="_View"
+                          Foreground="#FF291F1F" />
+            </Menu>
+        </DockPanel>
+        
+    </Grid>
+</Window>
