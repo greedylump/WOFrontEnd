@@ -47,8 +47,10 @@
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Path=CurrentView}"
                                      Value="1">
-                            <Setter Property="ContentTemplate"
-                                    Value="{StaticResource ResourceKey=HistoryTemplate}" />
+                         
+                                <Setter Property="ContentTemplate"
+                                        Value="{StaticResource ResourceKey=HistoryTemplate}" />
+                         
                         </DataTrigger>
                         
                     </Style.Triggers>

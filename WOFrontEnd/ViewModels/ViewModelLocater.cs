@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,22 +10,26 @@ using WOFrontEnd.Utility;
 
 namespace WOFrontEnd.ViewModels
 {
-    public class ViewModelLocater
+    public class ViewModelLocater : INotifyPropertyChanged
     {
         private static WorkOutDataService workoutDataService = new WorkOutDataService();
         private static WorkOutHistoryViewModel workoutHistoryViewModel;
         private static WorkOutEntryViewModel workoutEntryViewModel;
+        private static ViewState currentView;
 
-        public static ICommand EntryCommand { get; set; }
-        public static ICommand HistoryCommand { get; set; }
+        public  ICommand EntryCommand { get; set; }
+        public  ICommand HistoryCommand { get; set; }
 
         public enum ViewState
         {
             EntryView=0,
             HistoryView
         }
-        private static ViewState currentView;
-        public static ViewState CurrentView
+        
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public  ViewState CurrentView
         {
             get
             {
@@ -34,6 +39,7 @@ namespace WOFrontEnd.ViewModels
             set
             {
                 currentView = value;
+                RaisePropertyChanged("CurrentView");
             }
         }
         public static WorkOutHistoryViewModel WorkoutHistoryViewModel
@@ -62,34 +68,41 @@ namespace WOFrontEnd.ViewModels
 
         }
 
-       
 
-        private static void LoadCommands()
+        private bool CanSwitch(object obj)
+        {
+
+            return true;
+        }
+        private void LoadCommands()
         {
             EntryCommand = new CustomCommand(SwitchToEntry, CanSwitch);
             HistoryCommand = new CustomCommand(SwitchToHistory, CanSwitch);
             
 
         }
+        private void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 
-        private static void SwitchToHistory(object obj)
+        }
+        private void SwitchToHistory(object obj)
         {
             CurrentView = ViewState.HistoryView;
             
         }
 
-        private static void SwitchToEntry(object obj)
+        private void SwitchToEntry(object obj)
         {
             CurrentView = ViewState.EntryView; 
         }
 
-        private static bool CanSwitch(object obj)
-        {
+        
+        
 
-            return true;
-        }
 
-      
+
 
 
 

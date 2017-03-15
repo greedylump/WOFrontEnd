@@ -17,6 +17,7 @@ namespace WOFrontEnd.ViewModels
 
         private Exercise tempExercise = new Exercise();
         private WorkOut tempWorkOut = new WorkOut();
+        public event PropertyChangedEventHandler PropertyChanged;
 
 
         public ICommand SaveCommand { get; set; }
@@ -57,7 +58,7 @@ namespace WOFrontEnd.ViewModels
                 RaisePropertyChanged("TempWorkOut");
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+        
 
        
 
