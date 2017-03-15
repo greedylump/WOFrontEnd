@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-
+using WOFrontEnd.ViewModels;
 
 namespace WOFrontEnd
 {
@@ -15,6 +15,6 @@ namespace WOFrontEnd
     public partial class App : Application
     {
         
-        
+
     }
 }

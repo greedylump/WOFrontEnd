@@ -112,7 +112,7 @@
 
         <TextBox Grid.Column="1"
                  Grid.Row="3"
-                 Name="exerciseTB"
+                 Name="exerciseBox"
                  Height="{Binding ActualHeight, ElementName=exerciseLabel}" />
         <StackPanel Grid.Column="1"
                     Grid.Row="4"

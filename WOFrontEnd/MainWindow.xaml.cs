@@ -25,15 +25,11 @@ namespace WOFrontEnd
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        /*
-        WorkOut workout = new WorkOut();
-        Exercise exercise;
-        //= new Exercise();
-        */
+        
         public MainWindow()
         {
             InitializeComponent();
-            ViewModelLocater vmLocater = new ViewModelLocater();
+           
            
             
             
