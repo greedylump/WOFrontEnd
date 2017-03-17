@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,37 +10,48 @@ using WOFrontEnd.Utility;
 
 namespace WOFrontEnd.ViewModels
 {
-    public class ViewModelLocater
+    public class ViewModelLocater : INotifyPropertyChanged
     {
-        private WorkOutDataService workoutDataService = new WorkOutDataService();
-        private WorkOutHistoryViewModel workoutHistoryViewModel;
-        private WorkOutEntryViewModel workoutEntryViewModel;
+        private static WorkOutDataService workoutDataService = new WorkOutDataService();
+        private static WorkOutHistoryViewModel workoutHistoryViewModel;
+        private static WorkOutEntryViewModel workoutEntryViewModel;
+        private static ViewState currentView;
 
-        public ICommand EntryCommand { get; set; }
-        public ICommand HistoryCommand { get; set; }
+        public static ICommand EntryCommand { get; set; }
+        public static ICommand HistoryCommand { get; set; }
 
         public enum ViewState
         {
             EntryView=0,
             HistoryView
         }
-        public ViewState CurrentView;
-        public ViewModelLocater()
-        {
-            workoutHistoryViewModel = new WorkOutHistoryViewModel(workoutDataService);
-            workoutEntryViewModel = new WorkOutEntryViewModel(workoutDataService);
-            CurrentView= ViewState.EntryView;
-        }
+        
 
-        public WorkOutHistoryViewModel WorkoutHistoryViewModel
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public  ViewState CurrentView
+        {
+            get
+            {
+                return currentView;
+            }
+
+            set
+            {
+                currentView = value;
+                RaisePropertyChanged("CurrentView");
+            }
+        }
+        public static WorkOutHistoryViewModel WorkoutHistoryViewModel
         {
             get
             {
                 return workoutHistoryViewModel;
+
             }
 
         }
-        public WorkOutEntryViewModel WorkoutEntryViewModel
+        public static WorkOutEntryViewModel WorkoutEntryViewModel
         {
             get
             {
@@ -47,31 +59,50 @@ namespace WOFrontEnd.ViewModels
             }
 
         }
-
-        private void LoadCommands()
+        public ViewModelLocater()
         {
-            EntryCommand = new CustomCommand(SwitchToEntry, CanSwitch);
-            HistoryCommand = new CustomCommand(SwitchToHistory, CanSwitch);
+            workoutHistoryViewModel = new WorkOutHistoryViewModel(workoutDataService);
+            workoutEntryViewModel = new WorkOutEntryViewModel(workoutDataService);
+            LoadCommands();
+            CurrentView = ViewState.EntryView;
 
         }
 
-        private void SwitchToHistory(object obj)
-        {
-            CurrentView = ViewState.HistoryView;
-        }
-
-        private void SwitchToEntry(object obj)
-        {
-            CurrentView = ViewState.EntryView; ;
-        }
 
         private bool CanSwitch(object obj)
         {
 
             return true;
         }
+        private void LoadCommands()
+        {
+            EntryCommand = new CustomCommand(SwitchToEntry, CanSwitch);
+            HistoryCommand = new CustomCommand(SwitchToHistory, CanSwitch);
+            
 
-      
+        }
+        private void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+
+        }
+        private void SwitchToHistory(object obj)
+        {
+            CurrentView = ViewState.HistoryView;
+            
+        }
+
+        private void SwitchToEntry(object obj)
+        {
+            CurrentView = ViewState.EntryView; 
+        }
+
+        
+        
+
+
+
 
 
 
