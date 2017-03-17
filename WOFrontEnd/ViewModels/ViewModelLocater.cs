@@ -17,8 +17,8 @@ namespace WOFrontEnd.ViewModels
         private static WorkOutEntryViewModel workoutEntryViewModel;
         private static ViewState currentView;
 
-        public  ICommand EntryCommand { get; set; }
-        public  ICommand HistoryCommand { get; set; }
+        public static ICommand EntryCommand { get; set; }
+        public static ICommand HistoryCommand { get; set; }
 
         public enum ViewState
         {

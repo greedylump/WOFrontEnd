@@ -13,18 +13,19 @@
                       Width="525"
                       FontSize="20"
                       ShowIconOnTitleBar="True"
-                      Foreground="#FFF7F5F5">
+                      Background="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" >
 
 
    
 
-    <Controls:MetroWindow.DataContext>
+    <Controls:MetroWindow.DataContext >
         <vm:ViewModelLocater x:Name="ViewModelLocater"/>
     </Controls:MetroWindow.DataContext>
    
 
 
-    <StackPanel x:Name="outsideStackpanel" Orientation="Vertical">
+    <StackPanel x:Name="outsideStackpanel" Orientation="Vertical"
+                Background="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}">
         <StackPanel x:Name="insideStackPanel"
                     Orientation="Horizontal">
             <Button x:Name="button1"
@@ -39,7 +40,8 @@
                     Command="{Binding HistoryCommand}"/>
           
         </StackPanel>
-        <ContentControl Content="{Binding Path=CurrentView}">
+        <ContentControl Content="{Binding Path=CurrentView}" VerticalAlignment="Stretch"
+                        Height="435">
             <ContentControl.Style>
                 <Style TargetType="{x:Type ContentControl}">
                     <Setter Property="ContentTemplate"

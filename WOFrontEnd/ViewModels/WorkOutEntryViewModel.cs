@@ -13,15 +13,18 @@ namespace WOFrontEnd.ViewModels
 {
     public class WorkOutEntryViewModel : INotifyPropertyChanged, IWorkOutViewModel
     {
-        WorkOutDataService viewModelDataService;
+        WorkOutDataService viewModelDataService;//MIGHT NEED TO MAKE THIS A PROPERTY
 
         private Exercise tempExercise = new Exercise();
+        private int tempRep=0;
         private WorkOut tempWorkOut = new WorkOut();
         public event PropertyChangedEventHandler PropertyChanged;
 
 
         public ICommand SaveCommand { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand AddRepCommand { get; set; }
+
 
         public WorkOutEntryViewModel()
         {
@@ -45,6 +48,18 @@ namespace WOFrontEnd.ViewModels
                 RaisePropertyChanged("TempExercise");
             }
         }
+        public int TempRep
+        {
+            get
+            {
+                return tempRep;
+            }
+            set
+            {
+                tempRep = value;
+                RaisePropertyChanged("TempRep");
+            }
+        }
 
         public WorkOut TempWorkOut
         {
@@ -58,15 +73,39 @@ namespace WOFrontEnd.ViewModels
                 RaisePropertyChanged("TempWorkOut");
             }
         }
-        
 
-       
+
+
 
         private void LoadCommands()
         {
-            SaveCommand = new CustomCommand(SaveWorkOut,CanSave);
+            SaveCommand = new CustomCommand(SaveWorkOut, CanSave);
             AddCommand = new CustomCommand(AddWorkOut, CanAdd);
+            AddRepCommand = new CustomCommand(AddRep, CanAddRep );
         }
+
+        private void AddRep(object obj)
+        {
+            
+            TempExercise.Sets.Add(tempRep);
+            TempRep = 0;
+        }
+
+        private bool CanAdd(object obj)
+        {
+            if (tempExercise != null)
+                return true;
+
+            return false;
+        }
+        private bool CanAddRep(object obj)
+        {
+            if (tempRep != 0)
+                return true;
+
+            return false;
+        }
+
 
         private bool CanSave(object obj)
         {
@@ -82,13 +121,7 @@ namespace WOFrontEnd.ViewModels
             throw new NotImplementedException();
         }
 
-        private bool CanAdd(object obj)
-        {
-            if (tempExercise != null)
-                return true;
-
-            return false;
-        }
+       
 
         private void AddWorkOut(object obj)
         {

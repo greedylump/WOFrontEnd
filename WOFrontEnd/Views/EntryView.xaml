@@ -3,14 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WOFrontEnd.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Background="LightGray">
+             xmlns:local="clr-namespace:WOFrontEnd.ViewModels"
+             xmlns:con="clr-namespace:WOFrontEnd.Converters"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d">
 
+    <UserControl.DataContext>
+        <local:ViewModelLocater />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <con:DateConverter  x:Key="dateConverter" />
+    </UserControl.Resources>
 
-
-
+    <Grid Background="LightGray" >
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
@@ -61,22 +66,21 @@
                 _Reps or Cardio Time:
             </Label>
             <StackPanel Orientation="Horizontal"
-                        MinWidth="100"
+                
+                        MinHeight="{Binding ActualHeight, ElementName=repsLabel}"
                         HorizontalAlignment="Left">
                 <TextBlock Text="This exercise is"
                            HorizontalAlignment="Center" />
-                <RadioButton Content="Cardio  "
+                <RadioButton Content="Cardio"
                              IsThreeState="False"
                              IsChecked="True"
                              Foreground="#FF291F1F"
-                             Margin="23,0,20,0"
+                             Margin="5,0,5,0"
                              HorizontalAlignment="Left"
-                             x:Name="cardioButton"
-                             Width="57" />
+                             x:Name="cardioButton" />
                 <RadioButton Content="Str Train"
                              IsThreeState="False"
                              Foreground="#FF291F1F"
-                             Margin="5,0,0,0"
                              HorizontalAlignment="Left"
                              x:Name="strTrButton" />
             </StackPanel>
@@ -85,7 +89,7 @@
                     Content="Add Exercise"
                     Margin="0,10,0,10"
                     Name="addButton"
-                    ToolTip="Press here to add the current exercise and add another.">
+                    ToolTip="Press here to add the current exercise and enter another.">
                 <Button.Effect>
                     <DropShadowEffect />
                 </Button.Effect>
@@ -104,25 +108,52 @@
         <TextBox Grid.Column="1"
                  Grid.Row="1"
                  Height="{Binding ActualHeight, ElementName=dateLabel}"
-                 x:Name="dateBox" />
+                 x:Name="dateBox"
+                 Text="{Binding Path=WorkoutEntryViewModel.TempWorkOut.Date, 
+                 Mode=OneWayToSource,FallbackValue=03/14/1879, UpdateSourceTrigger=LostFocus,
+                 Converter={StaticResource dateConverter} }"/>
 
         <TextBox Grid.Column="1"
                  Grid.Row="2"
-                 x:Name="lengthBox" />
+                 x:Name="lengthBox"
+                 Height="{Binding ActualHeight, ElementName=lengthLabel}"
+                 Text="{Binding Path=WorkoutEntryViewModel.TempWorkOut.Length, 
+                 Mode=OneWayToSource,FallbackValue=0, UpdateSourceTrigger=LostFocus}"/>
 
         <TextBox Grid.Column="1"
                  Grid.Row="3"
                  Name="exerciseBox"
-                 Height="{Binding ActualHeight, ElementName=exerciseLabel}" />
+                 Height="{Binding ActualHeight, ElementName=exerciseLabel}"
+                 Text="{Binding Path=WorkoutEntryViewModel.TempExercise.Name, 
+                 Mode=OneWayToSource, FallbackValue='None', UpdateSourceTrigger=LostFocus}" />
+        
         <StackPanel Grid.Column="1"
                     Grid.Row="4"
                     Orientation="Vertical">
             <TextBox VerticalAlignment="Top"
                      Width="Auto"
                      Name="RepBox"
-                     Height="{Binding ActualHeight, ElementName=repsLabel}" />
-            <ListBox Name="repList">
+                     Height="Auto"
+                     Text="{Binding Path=WorkoutEntryViewModel.TempRep, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged }" >
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding Path=WorkoutEntryViewModel.AddRepCommand}"
+                                Key="Enter" />
+                </TextBox.InputBindings>
+            </TextBox>
+            <ListBox Name="repList"
+                     ItemsSource="{Binding Path=WorkoutEntryViewModel.TempExercise.Sets, 
+                     UpdateSourceTrigger=PropertyChanged,
+                     Mode=OneWay}"
+                     MinHeight="25">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                    </ListBox.ItemTemplate>
             </ListBox>
+
 
 
         </StackPanel>

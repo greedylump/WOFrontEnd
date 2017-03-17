@@ -16,7 +16,7 @@ namespace WOFrontEnd.Services
 /// </summary>
     public class WorkOutDataService
     {
-        WorkOutRepository workoutrepository;
+        public WorkOutRepository workoutrepository;
 
      
 
