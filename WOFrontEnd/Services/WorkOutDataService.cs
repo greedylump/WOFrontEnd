@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WorkOutClass;
 using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace WOFrontEnd.Services
 {/// <summary>
@@ -14,31 +15,45 @@ namespace WOFrontEnd.Services
 /// facilitate saving operations. This allows the repository to be agnostic about the save medium.
 /// Also, the SAME service is being passed to both views, ensuring they have the same data
 /// </summary>
-    public class WorkOutDataService
+    public class WorkOutDataService:INotifyPropertyChanged
     {
-        public WorkOutRepository workoutrepository;
+        private WorkOutRepository workoutRepository;
 
-     
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public WorkOutRepository WorkoutRepository
+        {
+            get
+            {
+                return workoutRepository;
+            }
+
+            set
+            {
+                workoutRepository = value;
+                RaisePropertyChanged("WorkoutRepository");
+            }
+        }
 
         public WorkOutDataService()
         {
-            workoutrepository = new WorkOutRepository();
+            workoutRepository = new WorkOutRepository();
             Load();
         }
 
         public WorkOutDataService(WorkOutRepository repos)
         {
-            workoutrepository = repos;
+            workoutRepository = repos;
         }
 
         public ObservableCollection<WorkOut> GetAllWorkOuts()
         {
-            return workoutrepository.allWorkOuts;
+            return workoutRepository.allWorkOuts;
         }
 
         public WorkOutRepository GetRepository()
         {
-            return workoutrepository;
+            return workoutRepository;
         }
 
 
@@ -70,7 +85,7 @@ namespace WOFrontEnd.Services
         {
             if (!File.Exists(DataFile))
             {
-                workoutrepository.allWorkOuts = new ObservableCollection<WorkOut>();
+                workoutRepository.allWorkOuts = new ObservableCollection<WorkOut>();
                 using (StreamWriter stream = File.CreateText(DataFile)) { };
             }
 
@@ -86,7 +101,7 @@ namespace WOFrontEnd.Services
                     }
                     else
                     {
-                        workoutrepository.allWorkOuts = nullCheck;
+                        workoutRepository.allWorkOuts = nullCheck;
                     }
 
                 }
@@ -97,7 +112,7 @@ namespace WOFrontEnd.Services
                     using (StreamWriter newstream = File.CreateText(Path.Combine(DataFolder, "WODataBlank.xml"))) { };
                     File.Replace(Path.Combine(DataFolder, "WODataBlank.xml"), Path.Combine(DataFolder, "WOData.xml"), Path.Combine(DataFolder, "WODataBackup.xml"));
                     Console.Beep();
-                    workoutrepository.allWorkOuts = new ObservableCollection<WorkOut>();
+                    workoutRepository.allWorkOuts = new ObservableCollection<WorkOut>();
                 }
 
             }
@@ -110,15 +125,22 @@ namespace WOFrontEnd.Services
         public void Save()
         {
 
-            if (!(workoutrepository.allWorkOuts == null))
+            if (!(workoutRepository.allWorkOuts == null))
             {
                 Load();
             }
 
             using (StreamWriter stream = File.CreateText(DataFile)) //rewrites the file each time
             {
-                stream.Write(JsonConvert.SerializeObject(workoutrepository.allWorkOuts));
+                stream.Write(JsonConvert.SerializeObject(workoutRepository.allWorkOuts));
             }
+        }
+
+        private void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+
         }
         /// <summary>
         /// Add a new workout and save all to file
@@ -127,18 +149,18 @@ namespace WOFrontEnd.Services
         public void Save(WorkOut work)
         {
 
-            if (!(workoutrepository.allWorkOuts == null))
+            if (!(workoutRepository.allWorkOuts == null))
             {
                 Load();
             }
 #warning Insert logic to check for existing date
 
-            workoutrepository.AddToCollection(work);
+            workoutRepository.AddToCollection(work);
 
 
             using (StreamWriter stream = File.CreateText(DataFile)) //rewrites the file each time
             {
-                stream.Write(JsonConvert.SerializeObject(workoutrepository.allWorkOuts));
+                stream.Write(JsonConvert.SerializeObject(workoutRepository.allWorkOuts));
             }
         }
    

@@ -25,5 +25,13 @@ namespace WOFrontEnd.Views
         {
             InitializeComponent();
         }
+
+        private void RepBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                RepBox.Text=string.Empty;
+        }
+
+     
     }
 }

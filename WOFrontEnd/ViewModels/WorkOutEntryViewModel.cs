@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace WOFrontEnd.ViewModels
         WorkOutDataService viewModelDataService;//MIGHT NEED TO MAKE THIS A PROPERTY
 
         private Exercise tempExercise = new Exercise();
+        private bool isCardio=true;
         private int tempRep=0;
         private WorkOut tempWorkOut = new WorkOut();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -61,6 +63,20 @@ namespace WOFrontEnd.ViewModels
             }
         }
 
+        public bool IsCardio
+        {
+            get
+            {
+                return isCardio;
+            }
+
+            set
+            {
+                isCardio = value;
+                RaisePropertyChanged("IsCardio");
+            }
+        }
+
         public WorkOut TempWorkOut
         {
             get
@@ -80,7 +96,7 @@ namespace WOFrontEnd.ViewModels
         private void LoadCommands()
         {
             SaveCommand = new CustomCommand(SaveWorkOut, CanSave);
-            AddCommand = new CustomCommand(AddWorkOut, CanAdd);
+            AddCommand = new CustomCommand(AddExercise, CanAdd);
             AddRepCommand = new CustomCommand(AddRep, CanAddRep );
         }
 
@@ -88,12 +104,12 @@ namespace WOFrontEnd.ViewModels
         {
             
             TempExercise.Sets.Add(tempRep);
-            TempRep = 0;
+            tempRep = 0; 
         }
 
         private bool CanAdd(object obj)
         {
-            if (tempExercise != null)
+            if (tempExercise.Sets.Count != 0)
                 return true;
 
             return false;
@@ -110,7 +126,7 @@ namespace WOFrontEnd.ViewModels
         private bool CanSave(object obj)
         {
 
-            if (tempWorkOut != null)
+            if (tempWorkOut.ExerciseList.Count!=0)
                 return true;
 
             return false; 
@@ -118,14 +134,38 @@ namespace WOFrontEnd.ViewModels
 
         private void SaveWorkOut(object obj)
         {
-            throw new NotImplementedException();
+            viewModelDataService.Save(TempWorkOut);
+            TempWorkOut = new WorkOut();
+#warning NEED TO CLEAR  DATE AND LENGTH BOX 
+
+
+
+
+
+
         }
 
-       
 
-        private void AddWorkOut(object obj)
+
+        private void AddExercise(object obj)
         {
-            throw new NotImplementedException();
+         
+            if (IsCardio)
+            {
+                var serEx = JsonConvert.SerializeObject(tempExercise);
+                Cardio newTemp = JsonConvert.DeserializeObject<Cardio>(serEx);
+                tempWorkOut.ExerciseList.Add(newTemp);
+            }
+            else
+            {
+                var serEx = JsonConvert.SerializeObject(tempExercise);
+                StrTrain newTemp = JsonConvert.DeserializeObject<StrTrain>(serEx);
+                tempWorkOut.ExerciseList.Add(newTemp);
+            }
+           
+            TempExercise = new Exercise();
+           
+            
         }
 
         private void RaisePropertyChanged(string propertyName)

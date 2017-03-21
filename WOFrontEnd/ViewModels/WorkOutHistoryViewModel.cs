@@ -13,13 +13,43 @@ namespace WOFrontEnd.ViewModels
 {
     public class WorkOutHistoryViewModel: INotifyPropertyChanged, IWorkOutViewModel
     {
-        WorkOutDataService viewModelDataService; 
+        private WorkOutDataService viewModelDataService;
+        private WorkOut selectedWorkOut = new WorkOut();
             
         private Exercise tempExercise = new Exercise();
         private WorkOut tempWorkOut = new WorkOut();
         //INPC might not be needed here
         public event PropertyChangedEventHandler PropertyChanged;
         public ICommand SaveCommand { get; set; }
+
+        public WorkOut SelectedWorkOut
+        {
+            get
+            {
+                return selectedWorkOut;
+            }
+            set
+            {
+                selectedWorkOut = value;
+                RaisePropertyChanged("SelectedWorkOut");
+            }
+        }
+
+        public WorkOutDataService ViewModelDataService
+        {
+            get
+            {
+                return viewModelDataService;
+            }
+
+            set
+            {
+                viewModelDataService = value;
+                RaisePropertyChanged("ViewModelDataService");
+            }
+
+        }
+
 
         public WorkOutHistoryViewModel()
         {
