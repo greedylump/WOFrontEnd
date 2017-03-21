@@ -2,11 +2,116 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WOFrontEnd.Views"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:con="clr-namespace:WOFrontEnd.Converters"
+             xmlns:local="clr-namespace:WOFrontEnd.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+           >
+    <UserControl.DataContext>
+        <local:ViewModelLocater />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <con:DateConverter  x:Key="dateConverter" />
+    </UserControl.Resources>
+
+    <Grid Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="50*" />
+        </Grid.RowDefinitions>
+       
+        <ListView ItemsSource="{Binding WorkoutHistoryViewModel.ViewModelDataService.WorkoutRepository.allWorkOuts}"
+                  SelectedItem="{Binding WorkoutHistoryViewModel.SelectedWorkOut}"
+                  Grid.Row="1"
+                  Name="mainListView"
+                  HorizontalAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+
+                    <Border BorderBrush="#FF130B0B"
+                            BorderThickness="1"
+                            HorizontalAlignment="Stretch"
+                            Width="{Binding ActualWidth, ElementName=mainListView}">
+                            
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition  Width="*" />
+                                <ColumnDefinition  Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Label     Content="DATE"
+                                       FontSize="10"
+                                       Grid.Row="0" />
+                            <Label     Content="Length"
+                                       FontSize="10"
+                                       Grid.Row="0"
+                                       Grid.Column="1" />
+                            <Label     Content="# OF EXERCISES"
+                                       FontSize="10"
+                                       Grid.Row="0"
+                                       Grid.Column="2" />
+
+                            <TextBlock Grid.Column="0"
+                                       Grid.Row="1"
+                                       Text="{Binding Date,Converter={StaticResource dateConverter}, Mode=OneWay}"
+                                       Name="dateTextHistory"
+                                       Margin="0,0,5,0" />
+                            <TextBlock Grid.Column="1"
+                                       Grid.Row="1"
+                                       Text="{Binding Length}"
+                                       Name="lengthTextHistory"
+                                       Margin="0,0,5,0"
+                                       HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="2"
+                                       Grid.Row="1"
+                                       Text="{Binding ExerciseList.Count}"
+                                       Name="numberTextHistory"
+                                    
+                                       HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+      
+       
+            <StackPanel Orientation="Vertical"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                         DataContext="{Binding WorkoutHistoryViewModel.SelectedWorkOut}">
+            <StackPanel Orientation="Horizontal">
+                <Label     Content="DATE"
+                           FontSize="10"
+                           Grid.Row="0" />
+                <Label     Content="Length"
+                           FontSize="10"
+                           Grid.Row="0"
+                           Grid.Column="1" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Date,Converter={StaticResource dateConverter}, Mode=OneWay}"
+                           Name="dateTextHistory"
+                           Margin="0,0,5,0" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                           Text="{Binding Length}"
+                           Name="lengthTextHistory"
+                           Margin="0,0,5,0"
+                           HorizontalAlignment="Right" />
+            </StackPanel>
+        </StackPanel>
             
+     
+
     </Grid>
 </UserControl>
