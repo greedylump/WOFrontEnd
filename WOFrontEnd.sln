@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WOFrontEnd", "WOFrontEnd\WOFrontEnd.csproj", "{4A248CCD-F199-4744-AA9B-DDF222DCCB39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkOutModel", "..\..\WorkOut2.0\Exercise\WorkOut\WorkOutModel.csproj", "{8659751D-0693-4004-8DF6-A92BDA248371}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkOutModel", "Exercise\WorkOut\WorkOutModel.csproj", "{8659751D-0693-4004-8DF6-A92BDA248371}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkOutTest", "..\..\WorkOut2.0\Exercise\WorkOutTest\WorkOutTest.csproj", "{789FA042-C0D8-4586-85CA-6A29ED5CC9B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkOutTest", "Exercise\WorkOutTest\WorkOutTest.csproj", "{789FA042-C0D8-4586-85CA-6A29ED5CC9B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
