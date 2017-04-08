@@ -139,12 +139,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\WorkOut2.0\Exercise\WorkOut\WorkOutModel.csproj">
-      <Project>{8659751d-0693-4004-8df6-a92bda248371}</Project>
-      <Name>WorkOutModel</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

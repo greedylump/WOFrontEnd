@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:WOFrontEnd.ViewModels"
              xmlns:con="clr-namespace:WOFrontEnd.Converters"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             d:DesignHeight="500"
+             d:DesignWidth="600">
 
     <UserControl.DataContext>
         <local:ViewModelLocater />
@@ -66,7 +68,7 @@
                 _Reps or Cardio Time:
             </Label>
             <StackPanel Orientation="Horizontal"
-                
+                       
                         MinHeight="{Binding ActualHeight, ElementName=repsLabel}"
                         HorizontalAlignment="Left">
                 <TextBlock Text="This exercise is"
@@ -74,12 +76,14 @@
                 <RadioButton Content="Cardio"
                              IsThreeState="False"
                              IsChecked="{Binding  WorkoutEntryViewModel.IsCardio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Background="AliceBlue"
                              Foreground="#FF291F1F"
                              Margin="5,0,5,0"
                              HorizontalAlignment="Left"
                              x:Name="cardioButton" 
                              />
                 <RadioButton Content="Str Train"
+                             Background="AliceBlue"
                              IsThreeState="False"
                              Foreground="#FF291F1F"
                              HorizontalAlignment="Left"
