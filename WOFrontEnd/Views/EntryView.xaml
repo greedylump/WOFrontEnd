@@ -66,7 +66,7 @@
                 _Reps or Cardio Time:
             </Label>
             <StackPanel Orientation="Horizontal"
-                
+                       
                         MinHeight="{Binding ActualHeight, ElementName=repsLabel}"
                         HorizontalAlignment="Left">
                 <TextBlock Text="This exercise is"
@@ -74,12 +74,14 @@
                 <RadioButton Content="Cardio"
                              IsThreeState="False"
                              IsChecked="{Binding  WorkoutEntryViewModel.IsCardio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             Background="AliceBlue"
                              Foreground="#FF291F1F"
                              Margin="5,0,5,0"
                              HorizontalAlignment="Left"
                              x:Name="cardioButton" 
                              />
                 <RadioButton Content="Str Train"
+                             Background="AliceBlue"
                              IsThreeState="False"
                              Foreground="#FF291F1F"
                              HorizontalAlignment="Left"
