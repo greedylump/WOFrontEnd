@@ -12,6 +12,7 @@ namespace WOFrontEnd.ViewModels
 {
     public class ViewModelLocater : INotifyPropertyChanged
     {
+       
         private static WorkOutDataService workoutDataService = new WorkOutDataService();
         private static WorkOutHistoryViewModel workoutHistoryViewModel;
         private static WorkOutEntryViewModel workoutEntryViewModel;
@@ -61,10 +62,11 @@ namespace WOFrontEnd.ViewModels
         }
         public ViewModelLocater()
         {
-            workoutHistoryViewModel = new WorkOutHistoryViewModel(workoutDataService);
-            workoutEntryViewModel = new WorkOutEntryViewModel(workoutDataService);
-            LoadCommands();
-            CurrentView = ViewState.EntryView;
+            
+                workoutHistoryViewModel = new WorkOutHistoryViewModel(workoutDataService);
+                workoutEntryViewModel = new WorkOutEntryViewModel(workoutDataService);
+                LoadCommands();
+                CurrentView = ViewState.EntryView;
 
         }
 

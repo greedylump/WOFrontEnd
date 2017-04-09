@@ -36,6 +36,7 @@ namespace WOFrontEnd.Services
         {
             workoutRepository = new WorkOutRepository();
             Load();
+
         }
 
         public WorkOutDataService(WorkOutRepository repos)
