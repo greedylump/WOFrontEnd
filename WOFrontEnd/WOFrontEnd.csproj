@@ -137,10 +137,12 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Other\WorkOut2.0\Exercise\WorkOut\WorkOutModel.csproj">
+    <ProjectReference Include="..\Exercise\WorkOut\WorkOutModel.csproj">
       <Project>{8659751d-0693-4004-8df6-a92bda248371}</Project>
       <Name>WorkOutModel</Name>
     </ProjectReference>

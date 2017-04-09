@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:con="clr-namespace:WOFrontEnd.Converters"
              xmlns:local="clr-namespace:WOFrontEnd.ViewModels"
-             mc:Ignorable="d" 
-           >
+             mc:Ignorable="d"
+             d:DesignHeight="500"
+             d:DesignWidth="600">
     <UserControl.DataContext>
         <local:ViewModelLocater />
     </UserControl.DataContext>

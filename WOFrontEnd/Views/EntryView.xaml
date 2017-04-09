@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:WOFrontEnd.ViewModels"
              xmlns:con="clr-namespace:WOFrontEnd.Converters"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             d:DesignHeight="500"
+             d:DesignWidth="600">
 
     <UserControl.DataContext>
         <local:ViewModelLocater />
